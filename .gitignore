@@ -1,0 +1,75 @@
+# ========================
+# Java / Spring MVC / Maven
+# ========================
+
+# Maven build directory
+/target/
+
+# Maven wrapper files
+.mvn/
+!/.mvn/wrapper/maven-wrapper.jar
+mvnw
+mvnw.cmd
+
+# ========================
+# Eclipse / STS / Spring Tool Suite
+# ========================
+
+# Eclipse project files
+.classpath
+.project
+.settings/
+
+# STS specific files
+.springBeans
+
+# Launch configurations
+*.launch
+
+# ========================
+# IntelliJ IDEA (nếu bạn có mở song song)
+# ========================
+.idea/
+*.iws
+*.iml
+*.ipr
+
+# ========================
+# Logs & temp files
+# ========================
+*.log
+*.tmp
+*.bak
+*.swp
+*.swo
+
+# ========================
+# OS-specific files
+# ========================
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Icon?
+
+# ========================
+# Environment & local configs
+# ========================
+.env
+application-local.properties
+application-dev.properties
+application-test.properties
+
+# ========================
+# Node / Frontend build (nếu có phần front-end)
+# ========================
+node_modules/
+dist/
+build/
+
+# ========================
+# Backup / archive files
+# ========================
+*.zip
+*.tar.gz
+*.rar
+*.7z
