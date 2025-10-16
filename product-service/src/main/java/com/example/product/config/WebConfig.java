@@ -13,7 +13,7 @@ import com.example.product.security.JwtAuthInterceptor;
 
 @Configuration
 @EnableWebMvc
-@ComponentScan(basePackages = "com.example.user.controller")
+@ComponentScan(basePackages = "com.example.product.controller")
 public class WebConfig implements WebMvcConfigurer {
 	
 	@Autowired

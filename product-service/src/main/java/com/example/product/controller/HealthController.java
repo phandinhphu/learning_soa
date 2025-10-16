@@ -12,7 +12,7 @@ public class HealthController {
 	@GetMapping("/health")
 	@ResponseBody
 	public String healthCheck() {
-		return "User Service is running";
+		return "Product Service is running";
 	}
 	
 }

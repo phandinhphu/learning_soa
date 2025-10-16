@@ -3,9 +3,9 @@
 -- ============================================
 
 -- Create database if not exists
-CREATE DATABASE IF NOT EXISTS product_db CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+CREATE DATABASE IF NOT EXISTS product_service CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
-USE product_db;
+USE product_service;
 
 -- ============================================
 -- Categories Table
