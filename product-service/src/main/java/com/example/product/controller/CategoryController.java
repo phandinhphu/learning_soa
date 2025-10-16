@@ -26,151 +26,70 @@ import com.example.product.service.interfaces.CategoryService;
 public class CategoryController {
 	@Autowired
 	private CategoryService categoryService;
-	
+
 	/**
-	 * Lấy danh sách tất cả danh mục
-	 * GET /api/categories
+	 * Lấy danh sách tất cả danh mục GET /api/categories
 	 */
 	@GetMapping
 	public ResponseEntity<Map<String, Object>> getAllCategories() {
-		try {
-			List<CategoryDTO> categories = categoryService.getAllCategories();
-			Map<String, Object> response = new HashMap<>();
-			response.put("success", true);
-			response.put("message", "Lấy danh sách danh mục thành công");
-			response.put("data", categories);
-			return ResponseEntity.ok(response);
-		} catch (Exception e) {
-			Map<String, Object> response = new HashMap<>();
-			response.put("success", false);
-			response.put("message", "Lỗi khi lấy danh sách danh mục: " + e.getMessage());
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
-		}
+		List<CategoryDTO> categories = categoryService.getAllCategories();
+		Map<String, Object> response = new HashMap<>();
+		response.put("success", true);
+		response.put("message", "Lấy danh sách danh mục thành công");
+		response.put("data", categories);
+		return ResponseEntity.ok(response);
 	}
-	
+
 	/**
-	 * Lấy chi tiết một danh mục theo ID
-	 * GET /api/categories/{id}
+	 * Lấy chi tiết một danh mục theo ID GET /api/categories/{id}
 	 */
 	@GetMapping("/{id}")
 	public ResponseEntity<Map<String, Object>> getCategoryById(@PathVariable String id) {
-		try {
-			CategoryDTO category = categoryService.getCategoryById(id);
-			
-			Map<String, Object> response = new HashMap<>();
-			response.put("success", true);
-			response.put("message", "Lấy thông tin danh mục thành công");
-			response.put("data", category);
-			return ResponseEntity.ok(response);
-		} catch (IllegalArgumentException e) {
-			Map<String, Object> response = new HashMap<>();
-			response.put("success", false);
-			response.put("message", e.getMessage());
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
-		} catch (Exception e) {
-			Map<String, Object> response = new HashMap<>();
-			response.put("success", false);
-			response.put("message", "Lỗi khi lấy thông tin danh mục: " + e.getMessage());
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
-		}
+		CategoryDTO category = categoryService.getCategoryById(id);
+
+		Map<String, Object> response = new HashMap<>();
+		response.put("success", true);
+		response.put("message", "Lấy thông tin danh mục thành công");
+		response.put("data", category);
+		return ResponseEntity.ok(response);
 	}
-	
+
 	/**
-	 * Tạo danh mục mới
-	 * POST /api/categories
-	 * Yêu cầu xác thực JWT
+	 * Tạo danh mục mới POST /api/categories Yêu cầu xác thực JWT
 	 */
 	@PostMapping
 	public ResponseEntity<Map<String, Object>> addCategory(@RequestBody CategoryRequest categoryRequest) {
-		try {
-			// Validate input
-			if (categoryRequest.getName() == null || categoryRequest.getName().trim().isEmpty()) {
-				Map<String, Object> response = new HashMap<>();
-				response.put("success", false);
-				response.put("message", "Tên danh mục không được để trống");
-				return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
-			}
-			
-			categoryService.addCategory(categoryRequest);
-			
-			Map<String, Object> response = new HashMap<>();
-			response.put("success", true);
-			response.put("message", "Thêm danh mục thành công");
-			return ResponseEntity.status(HttpStatus.CREATED).body(response);
-		} catch (IllegalArgumentException e) {
-			Map<String, Object> response = new HashMap<>();
-			response.put("success", false);
-			response.put("message", e.getMessage());
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
-		} catch (Exception e) {
-			Map<String, Object> response = new HashMap<>();
-			response.put("success", false);
-			response.put("message", "Lỗi khi thêm danh mục: " + e.getMessage());
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
-		}
+		categoryService.addCategory(categoryRequest);
+
+		Map<String, Object> response = new HashMap<>();
+		response.put("success", true);
+		response.put("message", "Thêm danh mục thành công");
+		return ResponseEntity.status(HttpStatus.CREATED).body(response);
 	}
-	
+
 	/**
-	 * Cập nhật thông tin danh mục
-	 * PUT /api/categories/{id}
-	 * Yêu cầu xác thực JWT
+	 * Cập nhật thông tin danh mục PUT /api/categories/{id} Yêu cầu xác thực JWT
 	 */
 	@PutMapping("/{id}")
-	public ResponseEntity<Map<String, Object>> updateCategory(
-			@PathVariable String id, 
-			@RequestBody Category category) {
-		try {
-			// Validate input
-			if (category.getName() == null || category.getName().trim().isEmpty()) {
-				Map<String, Object> response = new HashMap<>();
-				response.put("success", false);
-				response.put("message", "Tên danh mục không được để trống");
-				return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
-			}
-			
-			categoryService.updateCategory(id, category);
-			
-			Map<String, Object> response = new HashMap<>();
-			response.put("success", true);
-			response.put("message", "Cập nhật danh mục thành công");
-			return ResponseEntity.ok(response);
-		} catch (IllegalArgumentException e) {
-			Map<String, Object> response = new HashMap<>();
-			response.put("success", false);
-			response.put("message", e.getMessage());
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
-		} catch (Exception e) {
-			Map<String, Object> response = new HashMap<>();
-			response.put("success", false);
-			response.put("message", "Lỗi khi cập nhật danh mục: " + e.getMessage());
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
-		}
+	public ResponseEntity<Map<String, Object>> updateCategory(@PathVariable String id, @RequestBody Category category) {
+		categoryService.updateCategory(id, category);
+
+		Map<String, Object> response = new HashMap<>();
+		response.put("success", true);
+		response.put("message", "Cập nhật danh mục thành công");
+		return ResponseEntity.ok(response);
 	}
-	
+
 	/**
-	 * Xóa danh mục
-	 * DELETE /api/categories/{id}
-	 * Yêu cầu xác thực JWT
+	 * Xóa danh mục DELETE /api/categories/{id} Yêu cầu xác thực JWT
 	 */
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Map<String, Object>> deleteCategory(@PathVariable String id) {
-		try {
-			categoryService.deleteCategory(id);
-			
-			Map<String, Object> response = new HashMap<>();
-			response.put("success", true);
-			response.put("message", "Xóa danh mục thành công");
-			return ResponseEntity.ok(response);
-		} catch (IllegalArgumentException e) {
-			Map<String, Object> response = new HashMap<>();
-			response.put("success", false);
-			response.put("message", e.getMessage());
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
-		} catch (Exception e) {
-			Map<String, Object> response = new HashMap<>();
-			response.put("success", false);
-			response.put("message", "Lỗi khi xóa danh mục: " + e.getMessage());
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
-		}
+		categoryService.deleteCategory(id);
+
+		Map<String, Object> response = new HashMap<>();
+		response.put("success", true);
+		response.put("message", "Xóa danh mục thành công");
+		return ResponseEntity.ok(response);
 	}
 }
