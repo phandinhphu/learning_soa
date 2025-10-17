@@ -1,0 +1,24 @@
+_format_version: "3.0"
+_transform: true
+
+services:
+  - name: auth-service
+    url: http://host.docker.internal:8080/AuthService
+    routes:
+      - name: auth-route
+        paths:
+          - /api/auth
+
+  - name: user-service
+    url: http://host.docker.internal:8081/UserService
+    routes:
+      - name: user-route
+        paths:
+          - /api/users
+
+  - name: product-service
+    url: http://host.docker.internal:8082/ProductService
+    routes:
+      - name: product-route
+        paths:
+          - /api/products
