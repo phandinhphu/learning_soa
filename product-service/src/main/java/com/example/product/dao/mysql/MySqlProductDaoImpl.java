@@ -89,4 +89,10 @@ public class MySqlProductDaoImpl implements ProductDAO {
 		jdbcTemplate.update(sql, id);
 	}
 
+	@Override
+	public void updateProductStock(String id, int newStock) {
+		String sql = "UPDATE products SET stock = ? WHERE id = ?";
+		jdbcTemplate.update(sql, newStock, id);
+	}
+
 }

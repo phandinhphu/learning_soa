@@ -100,6 +100,25 @@ public class ProductServiceImpl implements ProductService {
 		productRepository.deleteProduct(id);
 	}
 	
+	@Override
+	public void updateProductStock(String id, int newStock) {
+		if (id == null || id.trim().isEmpty()) {
+			throw new ValidationException("ID sản phẩm không được để trống");
+		}
+		
+		if (newStock < 0) {
+			throw new ValidationException("Số lượng tồn kho không được âm");
+		}
+		
+		// Check if product exists
+		ProductDTO existingProduct = productRepository.getProductById(id);
+		if (existingProduct == null) {
+			throw new ResourceNotFoundException("Không tìm thấy sản phẩm với ID: " + id);
+		}
+		
+		productRepository.updateProductStock(id, newStock);
+	}
+	
 	/**
 	 * Validate product request data
 	 */
@@ -120,5 +139,4 @@ public class ProductServiceImpl implements ProductService {
 			throw new ValidationException("Category ID không được để trống");
 		}
 	}
-
 }

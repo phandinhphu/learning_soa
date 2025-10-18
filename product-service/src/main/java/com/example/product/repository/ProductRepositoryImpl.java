@@ -39,4 +39,9 @@ public class ProductRepositoryImpl implements ProductRepository {
 		productDAO.deleteProduct(id);
 	}
 
+	@Override
+	public void updateProductStock(String id, int newStock) {
+		productDAO.updateProductStock(id, newStock);
+	}
+
 }

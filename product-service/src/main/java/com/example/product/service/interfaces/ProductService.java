@@ -12,4 +12,5 @@ public interface ProductService {
 	void addProduct(ProductRequest product);
 	void updateProduct(Product product);
 	void deleteProduct(String id);
+	void updateProductStock(String id, int newStock);
 }

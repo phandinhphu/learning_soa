@@ -102,4 +102,22 @@ public class ProductController {
 		response.put("message", "Xóa sản phẩm thành công");
 		return ResponseEntity.ok(response);
 	}
+	
+	/**
+	 * Cập nhật số lượng sản phẩm
+	 * PUT /api/products/{id}/quantity
+	 * Yêu cầu xác thực JWT
+	 */
+	@PutMapping("/{id}/quantity")
+	public ResponseEntity<Map<String, Object>> updateProductQuantity(
+			@PathVariable String id, 
+			@RequestBody Map<String, Integer> quantityUpdate) {
+		int newQuantity = quantityUpdate.get("quantity");
+		productService.updateProductStock(id, newQuantity);
+		
+		Map<String, Object> response = new HashMap<>();
+		response.put("success", true);
+		response.put("message", "Cập nhật số lượng sản phẩm thành công");
+		return ResponseEntity.ok(response);
+	}
 }
