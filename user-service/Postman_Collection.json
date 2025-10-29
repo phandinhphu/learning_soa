@@ -1,0 +1,164 @@
+{
+	"info": {
+		"name": "User Service API",
+		"description": "Collection for testing User Service endpoints",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Health Check",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/api/health",
+					"host": ["{{baseUrl}}"],
+					"path": ["api", "health"]
+				},
+				"description": "Kiểm tra trạng thái hoạt động của service"
+			}
+		},
+		{
+			"name": "Get All Users",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/api/users",
+					"host": ["{{baseUrl}}"],
+					"path": ["api", "users"]
+				},
+				"description": "Lấy danh sách tất cả người dùng"
+			}
+		},
+		{
+			"name": "Get User By ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/api/users/{{userId}}",
+					"host": ["{{baseUrl}}"],
+					"path": ["api", "users", "{{userId}}"]
+				},
+				"description": "Lấy thông tin chi tiết một người dùng theo ID"
+			}
+		},
+		{
+			"name": "Search Users",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/api/users/search?keyword={{keyword}}",
+					"host": ["{{baseUrl}}"],
+					"path": ["api", "users", "search"],
+					"query": [
+						{
+							"key": "keyword",
+							"value": "{{keyword}}"
+						}
+					]
+				},
+				"description": "Tìm kiếm người dùng theo từ khóa (username, email, phone)"
+			}
+		},
+		{
+			"name": "Create User",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{jwtToken}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"username\": \"Test User\",\n  \"email\": \"testuser@example.com\",\n  \"phone\": \"0912345678\"\n}"
+				},
+				"url": {
+					"raw": "{{baseUrl}}/api/users",
+					"host": ["{{baseUrl}}"],
+					"path": ["api", "users"]
+				},
+				"description": "Tạo người dùng mới (Requires JWT authentication)"
+			}
+		},
+		{
+			"name": "Update User",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{jwtToken}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"id\": \"{{userId}}\",\n  \"username\": \"Updated User Name\",\n  \"email\": \"updatedemail@example.com\",\n  \"phone\": \"0987654321\"\n}"
+				},
+				"url": {
+					"raw": "{{baseUrl}}/api/users/{{userId}}",
+					"host": ["{{baseUrl}}"],
+					"path": ["api", "users", "{{userId}}"]
+				},
+				"description": "Cập nhật thông tin người dùng (Requires JWT authentication)"
+			}
+		},
+		{
+			"name": "Delete User",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{jwtToken}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{baseUrl}}/api/users/{{userId}}",
+					"host": ["{{baseUrl}}"],
+					"path": ["api", "users", "{{userId}}"]
+				},
+				"description": "Xóa người dùng (Requires JWT authentication)"
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:8081/UserService",
+			"type": "string"
+		},
+		{
+			"key": "jwtToken",
+			"value": "your-jwt-token-here",
+			"type": "string"
+		},
+		{
+			"key": "userId",
+			"value": "user001",
+			"type": "string"
+		},
+		{
+			"key": "keyword",
+			"value": "nguyen",
+			"type": "string"
+		}
+	]
+}

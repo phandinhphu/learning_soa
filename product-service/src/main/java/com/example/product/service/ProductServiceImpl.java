@@ -17,7 +17,6 @@ import com.example.product.repository.ProductRepository;
 import com.example.product.service.interfaces.ProductService;
 
 @Service
-@Transactional
 public class ProductServiceImpl implements ProductService {
 	@Autowired
 	private ProductRepository productRepository;
@@ -53,7 +52,7 @@ public class ProductServiceImpl implements ProductService {
 		validateProductRequest(productRequest);
 		
 		// Generate unique ID
-		String id = UUID.randomUUID().toString().substring(0, 8);
+		String id = "prod" + UUID.randomUUID().toString().substring(0, 8);
 
 		Product newProduct = productMapper.toEntity(productRequest);
 		newProduct.setId(id);

@@ -24,7 +24,7 @@ services:
           - /api/products
 
   - name: order-service
-  	url: http://host.docker.internal:8083/OrderService
+    url: http://host.docker.internal:8083/OrderService
     routes:
       - name: order-route
         paths:

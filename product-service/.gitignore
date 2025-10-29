@@ -73,3 +73,5 @@ build/
 *.tar.gz
 *.rar
 *.7z
+/.apt_generated/
+/.apt_generated_tests/

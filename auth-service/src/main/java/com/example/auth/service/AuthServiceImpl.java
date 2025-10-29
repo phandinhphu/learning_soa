@@ -32,7 +32,7 @@ public class AuthServiceImpl implements AuthService {
 			throw new IllegalArgumentException("Email đã được sử dụng");
 		}
 		
-		String id = UUID.randomUUID().toString().substring(0, 8);
+		String id = "user" + UUID.randomUUID().toString();
 		
 		// Gọi dịch vụ User service để tạo hồ sơ người dùng
 		String serviceBaseUrl = consulDiscoveryService.resolveServiceBaseUrl("user-service");

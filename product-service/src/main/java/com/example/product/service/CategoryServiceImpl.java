@@ -17,7 +17,6 @@ import com.example.product.repository.CategoryRepository;
 import com.example.product.service.interfaces.CategoryService;
 
 @Service
-@Transactional
 public class CategoryServiceImpl implements CategoryService {
 	@Autowired
 	private CategoryRepository categoryRepository;
@@ -55,7 +54,7 @@ public class CategoryServiceImpl implements CategoryService {
 		validateCategoryRequest(categoryRequest);
 		
 		// Generate unique ID
-		String id = UUID.randomUUID().toString().substring(0, 8);
+		String id = "cat" + UUID.randomUUID().toString().substring(0, 8);
 		
 		Category newCategory = categoryMapper.toEntity(categoryRequest);
 		newCategory.setId(id);
