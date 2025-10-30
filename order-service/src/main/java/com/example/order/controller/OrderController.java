@@ -34,6 +34,7 @@ public class OrderController {
 	 */
 	@PostMapping
 	public ResponseEntity<Map<String, Object>> createOrder(HttpServletRequest request, @RequestBody CreateOrderDTO createOrderDTO) {
+		createOrderDTO.setCustomerId((String) request.getAttribute("userId"));
 		OrderDTO order = orderService.createOrder(createOrderDTO, request);
 
 		Map<String, Object> response = new HashMap<>();

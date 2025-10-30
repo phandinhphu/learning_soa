@@ -37,7 +37,7 @@ public class AuthServiceImpl implements AuthService {
 		// Gọi dịch vụ User service để tạo hồ sơ người dùng
 		String serviceBaseUrl = consulDiscoveryService.resolveServiceBaseUrl("user-service");
 		if (serviceBaseUrl == null) {
-			throw new IllegalArgumentException("Auth service not available");
+			throw new IllegalArgumentException("User service not available");
 		}
 		
 		String contextPath = consulDiscoveryService.inferContextPath("user-service");
